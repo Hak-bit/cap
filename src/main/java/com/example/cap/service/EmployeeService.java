@@ -21,4 +21,9 @@ public class EmployeeService {
 
         employeeStorageService.store(employee);
     }
+
+    public Employee getEmployee(int id) {
+        return employeeStorageService.findById(id);
+    }
+
 }
