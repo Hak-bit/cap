@@ -8,9 +8,9 @@ import com.example.cap.exception.EmployeeNotFoundException;
 import com.example.cap.model.Employee;
 import org.junit.jupiter.api.Test;
 
-class EmployeeStorageServiceTest {
+class EmployeeStorageServiceListImplTest {
 
-    private EmployeeStorageService storageUnderTest = new EmployeeStorageService();
+    private EmployeeStorageServiceListImpl storageUnderTest = new EmployeeStorageServiceListImpl();
 
     @Test
     void whenEmployeeNotFound_thenThrowException() {

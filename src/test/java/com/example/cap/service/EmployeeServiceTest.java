@@ -1,12 +1,13 @@
 package com.example.cap.service;
 
 import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.example.cap.model.Employee;
 import java.util.UUID;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class EmployeeServiceTest {
 
     @Mock
+    //SPY
     private EmployeeStorageService storageServiceMock;
 
     @Captor
@@ -43,4 +45,27 @@ class EmployeeServiceTest {
         Assertions.assertEquals(100, capturedEmp.getId());
     }
 
+    @Test
+    void createMultipleEmployees() {
+        int numOfEmployees = 5;
+
+        for (int i = 0; i < numOfEmployees; i++) {
+            serviceUnderTest.createEmployee("Emp" + i, "RAND");
+        }
+
+        verify(storageServiceMock, times(5)).store(empArgCaptor.capture());
+    }
+
+    @Test
+    public void getEmployee() {
+        int id = 9;
+        String name = "Roshan";
+        when(storageServiceMock.findById(id))
+            .thenReturn(new Employee(id, name, "dept"));
+
+        Employee employee = serviceUnderTest.getEmployee(id);
+
+        Assertions.assertEquals(id, employee.getId());
+        Assertions.assertEquals(name, employee.getName());
+    }
 }
