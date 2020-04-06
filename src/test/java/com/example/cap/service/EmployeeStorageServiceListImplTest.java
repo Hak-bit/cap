@@ -34,4 +34,25 @@ class EmployeeStorageServiceListImplTest {
 
         assertEquals(empId, employee.getId());
     }
+
+    @Test
+    public void delete() {
+        int empId = 200;
+        storageUnderTest.store(new Employee(empId, "FN", "DEPT"));
+        Employee employee = storageUnderTest.findById(empId);
+        assertEquals(empId, employee.getId());
+
+        storageUnderTest.delete(empId);
+
+        assertThrows(
+            EmployeeNotFoundException.class,
+            () -> storageUnderTest.findById(empId),
+            "Expected findById() to throw, but it didn't"
+        );
+    }
+
+    private void ref() {
+        throw  new RuntimeException("Testing testing!!!");
+    }
+
 }

@@ -6,6 +6,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.example.cap.model.Employee;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -68,4 +70,32 @@ class EmployeeServiceTest {
         Assertions.assertEquals(id, employee.getId());
         Assertions.assertEquals(name, employee.getName());
     }
+
+    /*@Test
+    public void getAllEmployees() {
+        serviceUnderTest = new EmployeeService(new EmployeeStorageServiceListImpl());
+        String name = "Roshan";
+        serviceUnderTest.createEmployee(name, "IT");
+
+        Employee employee = serviceUnderTest.getEmployee(100);
+        Assertions.assertEquals(100, employee.getId());
+
+        List<Employee> emps = serviceUnderTest.getAllEmployees();
+
+        employee = serviceUnderTest.getEmployee(100);
+        Assertions.assertEquals(100, employee.getId());
+    }*/
+
+    @Test
+    public void getAllEmployees() {
+        int id = 9;
+        String name = "Bidur";
+        when(storageServiceMock.findAll())
+            .thenReturn(Arrays.asList(new Employee(id, name, "dept")));
+
+        List<Employee> employees = serviceUnderTest.getAllEmployees();
+
+        Assertions.assertEquals(id, employees.get(0).getId());
+    }
+
 }

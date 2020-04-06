@@ -1,6 +1,7 @@
 package com.example.cap.service;
 
 import com.example.cap.model.Employee;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 //SOLID
@@ -24,6 +25,10 @@ public class EmployeeService {
 
     public Employee getEmployee(int id) {
         return employeeStorageService.findById(id);
+    }
+
+    public List<Employee> getAllEmployees() {
+        return employeeStorageService.findAll();
     }
 
 }
