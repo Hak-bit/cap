@@ -1,7 +1,11 @@
 package com.example.cap.model;
 
+import java.io.Serializable;
+import java.util.Objects;
+
 //id, name, dept
-public final class Employee {
+public final class Employee implements Serializable {
+
     private final int id;
     private final String name;
     private final String dept;
@@ -22,5 +26,22 @@ public final class Employee {
 
     public String getDept() {
         return dept;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Employee employee = (Employee) o;
+        return id == employee.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

@@ -31,4 +31,8 @@ public class EmployeeService {
         return employeeStorageService.findAll();
     }
 
+    public void update(Employee employee) {
+        employeeStorageService.update(employee);
+    }
+
 }

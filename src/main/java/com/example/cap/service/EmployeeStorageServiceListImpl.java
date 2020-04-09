@@ -23,6 +23,17 @@ public class EmployeeStorageServiceListImpl implements EmployeeStorageService {
     }
 
     @Override
+    public Employee update(Employee employee) {
+        for(int i = 0; i < employeeStore.size(); i++) {
+            if (employee.equals(employeeStore.get(i))) {
+                employeeStore.set(i, employee);
+            }
+        }
+
+        return employee;
+    }
+
+    @Override
     public void delete(int id) {
         Iterator<Employee> iter = employeeStore.iterator();
         while(iter.hasNext()) {

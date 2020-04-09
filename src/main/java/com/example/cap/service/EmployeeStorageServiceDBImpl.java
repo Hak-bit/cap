@@ -21,6 +21,11 @@ public class EmployeeStorageServiceDBImpl implements EmployeeStorageService {
     }
 
     @Override
+    public Employee update(Employee employee) {
+        return null;
+    }
+
+    @Override
     public void delete(int id) {
 
     }

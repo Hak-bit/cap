@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.example.cap.exception.EmployeeNotFoundException;
 import com.example.cap.model.Employee;
+import java.util.function.Function;
 import org.junit.jupiter.api.Test;
 
 class EmployeeStorageServiceListImplTest {
@@ -51,8 +52,30 @@ class EmployeeStorageServiceListImplTest {
         );
     }
 
+    private void test() {
+        test1(storageUnderTest::findById, 100);
+    }
+
+    private void test1(Function<Integer, Employee> fx, int id) {
+        fx.apply(id);
+    }
+
     private void ref() {
         throw  new RuntimeException("Testing testing!!!");
     }
 
+    @Test
+    public void update() {
+        int empId = 200;
+        String name = "ChangeIt";
+        storageUnderTest.store(new Employee(empId, name, "DEPT"));
+        Employee employee = storageUnderTest.findById(empId);
+        assertEquals(name, employee.getName());
+
+        String nameChange = "Changed";
+        Employee newEmp = new Employee(empId, nameChange, "DEPT");
+        storageUnderTest.update(newEmp);
+        employee = storageUnderTest.findById(empId);
+        assertEquals(nameChange, employee.getName());
+    }
 }

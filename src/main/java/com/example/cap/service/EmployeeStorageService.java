@@ -14,6 +14,9 @@ public interface EmployeeStorageService {
 
     List<Employee> findAll();
 
+    //UPDATE
+    Employee update(Employee employee);
+
     //DELETE
     void delete(int id);
 }
